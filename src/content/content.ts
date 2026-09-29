@@ -509,7 +509,7 @@ export const phases = {
   items: [
     {
       index: "01",
-      date: "04 SET",
+      date: "04 NOV",
       title: "Draft",
       description:
         "Os capitães são definidos e os 48 atletas distribuídos nas 3 lines de 16 jogadores.",
@@ -517,7 +517,7 @@ export const phases = {
     },
     {
       index: "02",
-      date: "05—06 SET",
+      date: "11—13 NOV",
       title: "Fase de grupos",
       description: "Os jogadores entram em campo e começam a ser avaliados.",
       highlight: false,
@@ -531,7 +531,7 @@ export const phases = {
     },
     {
       index: "04",
-      date: "12 SET",
+      date: "14—15 NOV",
       title: "Fases finais",
       description: "As partidas decisivas contam com transmissão e narração profissional.",
       highlight: true,
@@ -542,15 +542,16 @@ export const phases = {
 export const calendar = {
   eyebrow: "CALENDÁRIO",
   season: "TEMPORADA 2026",
-  titleLead: "Setembro",
+  titleLead: "Novembro",
   titleAccent: "decide",
   paragraph:
-    "Quatro datas: o draft abre a liga, a fase de grupos define os classificados e as finais têm transmissão e narração.",
+    "Cinco datas: o draft abre a liga, a fase de grupos define os classificados, o mata-mata acirra a disputa e a finalíssima conta com transmissão e narração.",
   days: [
-    { weekday: "QUINTA", day: "04", month: "SET", title: "Draft", highlight: false },
-    { weekday: "SEXTA", day: "05", month: "SET", title: "Fase de grupos", highlight: false },
-    { weekday: "SÁBADO", day: "06", month: "SET", title: "Fase de grupos", highlight: false },
-    { weekday: "SEXTA", day: "12", month: "SET", title: "Finais", highlight: true },
+    { weekday: "SEGUNDA", day: "04", month: "NOV", title: "Draft", highlight: false },
+    { weekday: "SEGUNDA", day: "11", month: "NOV", title: "Fase de grupos", highlight: false },
+    { weekday: "QUARTA", day: "13", month: "NOV", title: "Fase de grupos", highlight: false },
+    { weekday: "QUINTA", day: "14", month: "NOV", title: "Mata-mata", highlight: false },
+    { weekday: "SEXTA", day: "15", month: "NOV", title: "Grande final", highlight: true },
   ] satisfies CalendarDay[],
 } as const;
 
