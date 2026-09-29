@@ -53,6 +53,13 @@ export function RegistrationForm() {
       selectedPositions.forEach((position, index) => {
         formData.set(`position${index + 1}`, position);
       });
+      
+      // If standard plan, set dummy values so backend validation passes
+      if (selectedPlan === "standard") {
+        formData.set("shirtSize", shirtSizes[0]); // P
+        formData.set("shirtNumber", "10");
+      }
+
       const response = await fetch("/api/registrations", {
         method: "POST",
         body: formData,
@@ -73,8 +80,27 @@ export function RegistrationForm() {
         return;
       }
 
+      // Constrói a mensagem para o WhatsApp
+      const name = formData.get("name") as string;
+      const gameId = formData.get("gameId") as string;
+      const instagram = formData.get("instagram") as string;
+      const whatsapp = formData.get("whatsapp") as string;
+      const plan = selectedPlan === "premium" ? "Plano Premium (R$ 89,90)" : "Plano de Inscrição (R$ 49,90)";
+      const posStr = selectedPositions.join(", ");
+      
+      const summaryText = `*Nova Inscrição - Vikings League* 🏆
+Nome: ${name}
+ID Jogo: ${gameId}
+Instagram: @${instagram}
+WhatsApp: ${whatsapp}
+Plano Escolhido: *${plan}*
+Posições: ${posStr}`;
+
+      const encodedText = encodeURIComponent(summaryText);
+      const waDirectUrl = `https://wa.me/5512996241211?text=${encodedText}`;
+
       form.reset();
-      setStatus({ state: "success", groupUrl: result.groupUrl });
+      setStatus({ state: "success", groupUrl: waDirectUrl });
     } catch {
       resetTurnstile();
       setStatus({
@@ -91,10 +117,10 @@ export function RegistrationForm() {
           <Check width={24} height={24} strokeWidth={2} aria-hidden />
         </div>
         <h3 className="mt-6 font-display text-[clamp(30px,5vw,50px)] leading-[0.95] font-extrabold uppercase">
-          Inscrição <span className="text-accent-soft">confirmada</span>
+          Inscrição <span className="text-accent-soft">registrada</span>
         </h3>
         <p className="mt-4 max-w-[48ch] text-[15px] leading-[1.65] text-text-muted">
-          Seus dados foram registrados. Entre agora no grupo oficial para receber as próximas instruções.
+          Seus dados foram salvos! Para confirmar sua participação, envie o resumo da sua inscrição no nosso WhatsApp oficial.
         </p>
         <a
           href={status.groupUrl}
@@ -102,7 +128,7 @@ export function RegistrationForm() {
           rel="noopener"
           className={cn(buttonVariants({ size: "block" }), "mt-7")}
         >
-          ENTRAR NO GRUPO
+          ENVIAR RESUMO NO WHATSAPP
           <ArrowRight width={18} height={18} strokeWidth={1.7} aria-hidden />
         </a>
       </div>
@@ -208,23 +234,27 @@ export function RegistrationForm() {
             required
           />
         </Field>
-        <Field label="Tamanho da camisa">
-          <select className={inputClass} name="shirtSize" defaultValue="" required>
-            <option value="" disabled>Selecione</option>
-            {shirtSizes.map((size) => <option key={size} value={size}>{size}</option>)}
-          </select>
-        </Field>
-        <Field label="Número da camisa">
-          <input
-            className={inputClass}
-            name="shirtNumber"
-            type="text"
-            inputMode="numeric"
-            maxLength={2}
-            pattern="[1-9][0-9]?"
-            required
-          />
-        </Field>
+        {selectedPlan === "premium" && (
+          <>
+            <Field label="Tamanho da camisa">
+              <select className={inputClass} name="shirtSize" defaultValue="" required>
+                <option value="" disabled>Selecione</option>
+                {shirtSizes.map((size) => <option key={size} value={size}>{size}</option>)}
+              </select>
+            </Field>
+            <Field label="Número da camisa">
+              <input
+                className={inputClass}
+                name="shirtNumber"
+                type="text"
+                inputMode="numeric"
+                maxLength={2}
+                pattern="[1-9][0-9]?"
+                required
+              />
+            </Field>
+          </>
+        )}
       </div>
 
       <fieldset className="border-t border-line-strong p-[clamp(12px,1.5vw,16px)]">

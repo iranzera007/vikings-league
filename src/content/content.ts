@@ -168,6 +168,7 @@ export const nav = {
     { label: "09", href: "#sv" },
     { label: "10", href: "#sp" },
     { label: "11", href: "#sn" },
+    { label: "12", href: "#sr" },
   ],
 } as const;
 
@@ -180,6 +181,7 @@ export const header = {
     { label: "Calendário", href: "#s5" },
     { label: "Premiação", href: "#s7" },
     { label: "Vídeos", href: "#sv" },
+    { label: "Regulamento", href: "#sr" },
   ],
 } as const;
 
@@ -826,3 +828,116 @@ export const footer = {
     ],
   },
 } as const;
+
+export const rules = {
+  eyebrow: "REGRAS E NORMATIVAS",
+  titleLead: "Regulamento",
+  titleAccent: "Oficial",
+  edition: "2ª EDIÇÃO DA VIKINGS LEAGUE",
+  subtitle:
+    "Confira os requisitos, formato do draft, estrutura de grupos, Scout Clubs e premiações oficiais da competição.",
+  categories: [
+    {
+      id: "requirements",
+      title: "Requisitos e Inscrição dos Atletas",
+      tag: "CADASTRO & REQUISITOS",
+      items: [
+        { label: "Idade Mínima", text: "14 anos completos." },
+        { label: "Nível de Habilidade", text: "Aberto para todos os níveis de jogabilidade (amador ao profissional)." },
+        {
+          label: "Dados Obrigatórios para Cadastro",
+          bullets: [
+            "Foto para arte de apresentação no Instagram oficial da equipe (+19k seguidores).",
+            "ID dentro do jogo (PSN / Gamertag / EA ID).",
+            "@ do Instagram do jogador.",
+            "Posição Primária, Posição Secundária e Terciária.",
+            "WhatsApp de contato direto.",
+          ],
+        },
+      ],
+    },
+    {
+      id: "draft",
+      title: "Formato do Draft e Estrutura de Equipes",
+      tag: "MONTAGEM DE ELENCOS",
+      items: [
+        { label: "Draft ao Vivo", text: "Realizado via transmissão ao vivo em formato de sorteio oficial." },
+        { label: "Capitães Fixos", text: "Mínimo de 12 capitães fixos (capacidade inicial para 132 atletas)." },
+        { label: "Expansão Proporcional", text: "Caso o número de inscritos ultrapasse 132 jogadores, novas vagas e capitães serão adicionados proporcionalmente." },
+      ],
+    },
+    {
+      id: "format",
+      title: "Formato da Competição e Fases",
+      tag: "ESTRUTURA DE JOGOS",
+      items: [
+        {
+          label: "Divisão dos Grupos (12 Equipes)",
+          bullets: [
+            "Grupo A: 6 equipes.",
+            "Grupo B: 6 equipes.",
+          ],
+        },
+        {
+          label: "Fase Inicial (Fase de Grupos)",
+          bullets: [
+            "Jogos somente de ida (partida única).",
+            "Classificam-se as 8 melhores equipes no geral para o Mata-Mata.",
+          ],
+        },
+        {
+          label: "Fase Final (Mata-Mata)",
+          bullets: [
+            "Quartas de Final: Jogo único eliminatório.",
+            "Semifinais: Jogo único eliminatório.",
+            "Disputa de 3º Lugar: Jogo único.",
+            "Grande Final: Melhor de 3 partidas (MD3).",
+          ],
+        },
+      ],
+    },
+    {
+      id: "scout",
+      title: "Estatísticas e Ranking (Scout Clubs)",
+      tag: "DESEMPENHO TÉCNICO",
+      items: [
+        {
+          label: "Métricas Monitoradas Individualmente",
+          bullets: [
+            "Ranking de Artilharia e Assistências.",
+            "Ranking de Finalizadores e Acertos de Passe.",
+            "Ranking de Desarmes.",
+            "Ranking por Posição dos Jogadores e Scout Geral Completo.",
+          ],
+        },
+      ],
+    },
+    {
+      id: "awards",
+      title: "Premiações Oficiais",
+      tag: "TROFÉUS & MEDALHAS",
+      items: [
+        {
+          label: "Premiações Coletivas",
+          bullets: [
+            "Elenco Campeão: 11 Medalhas Oficiais de Campeão.",
+            "Elenco Vice-Campeão: 11 Medalhas Oficiais de Vice-Campeão.",
+            "Terceiro Colocado: 11 Medalhas Oficiais de 3º Lugar.",
+          ],
+        },
+        {
+          label: "Destaques Individuais (Troféus Físicos)",
+          bullets: [
+            "Artilheiro: Troféu exclusivo.",
+            "Maestro da Competição: Troféu individual.",
+            "Melhor Ala: Troféu individual.",
+            "Melhor Volante: Troféu individual.",
+            "Melhor Zagueiro: Troféu individual.",
+            "Melhor Goleiro: Troféu individual.",
+          ],
+        },
+      ],
+    },
+  ],
+} as const;
+

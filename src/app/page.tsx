@@ -13,6 +13,7 @@ import { ScoutingSection } from "@/components/sections/scouting-section";
 import { AwardsSection } from "@/components/sections/awards-section";
 import { VideoGallerySection } from "@/components/sections/video-gallery-section";
 import { PartnersSection } from "@/components/sections/partners-section";
+import { RulesSection } from "@/components/sections/rules-section";
 import { FinalCtaSection } from "@/components/sections/final-cta-section";
 import { SiteFooter } from "@/components/sections/site-footer";
 import { RegistrationModal } from "@/components/registration-modal";
@@ -42,6 +43,7 @@ export default function Page() {
         <VideoGallerySection />
         <PartnersSection />
         <NumbersSection />
+        <RulesSection />
         <FinalCtaSection />
       </main>
 
