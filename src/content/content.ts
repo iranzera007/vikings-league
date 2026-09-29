@@ -765,11 +765,11 @@ export const awards = {
     },
     {
       id: "lance-7",
-      title: "Chute no Ângulo",
-      category: "lances",
-      badge: "CHUTE PRECISO",
+      title: "Apresentação de Medalhas",
+      category: "troféus",
+      badge: "MEDALHAS OFICIAIS",
       src: "/videos/lance-7.mp4",
-      description: "Finalização potente sem qualquer hipótese de defesa.",
+      description: "Exibição em detalhes das medalhas oficiais entregues aos participantes.",
     },
   ] satisfies TrophyVideo[],
 } as const;
