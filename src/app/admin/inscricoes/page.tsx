@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { CheckCircle2, Image as ImageIcon } from "lucide-react";
+import { CheckCircle2, Image as ImageIcon, Download } from "lucide-react";
 import {
   listRegistrations,
   getPhotoSignedUrl
 } from "@/lib/registration-admin";
+import { buttonVariants } from "@/components/ui/button";
 import { DeleteButton } from "./delete-button";
 import { ConfirmButton } from "./confirm-button";
 
@@ -33,6 +34,12 @@ export default async function RegistrationAdminPage() {
           <p className="mt-2 text-sm text-text-muted">
             {registrations.length} {registrations.length === 1 ? "inscrição registrada" : "inscrições registradas"}
           </p>
+        </div>
+        <div className="flex gap-2">
+          <a href="/api/admin/export-registrations" className={buttonVariants({ size: "sm" })}>
+            <Download width={16} height={16} strokeWidth={1.8} aria-hidden />
+            EXPORTAR CSV
+          </a>
         </div>
       </div>
 
