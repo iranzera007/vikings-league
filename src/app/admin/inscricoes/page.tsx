@@ -57,11 +57,18 @@ export default async function RegistrationAdminPage() {
               <tr key={reg.id} className="border-b border-line last:border-b-0 hover:bg-white/4">
                 <td className="px-4 py-3">
                   {photoUrls[reg.id] ? (
-                    <a href={photoUrls[reg.id]!} target="_blank" rel="noopener" className="inline-flex items-center text-accent hover:text-white transition-colors" title="Ver foto">
-                      <ImageIcon width={20} height={20} />
+                    <a href={photoUrls[reg.id]!} target="_blank" rel="noopener" className="block w-10 h-10 overflow-hidden rounded-md border border-line-strong hover:border-accent transition-colors" title="Ver foto ampliada">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img 
+                        src={photoUrls[reg.id]!} 
+                        alt={`Foto de ${reg.name}`}
+                        className="w-full h-full object-cover"
+                      />
                     </a>
                   ) : (
-                    <span className="text-text-faint">-</span>
+                    <div className="w-10 h-10 rounded-md border border-line border-dashed flex items-center justify-center bg-black/20 text-text-faint">
+                      <ImageIcon width={16} height={16} />
+                    </div>
                   )}
                 </td>
                 <td className="px-4 py-3 text-text-body">
