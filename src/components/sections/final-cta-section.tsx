@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRight, ShieldCheck } from "lucide-react";
+import { ArrowRight, ShieldCheck, Shirt, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RevealSection } from "@/components/ui/reveal-section";
 import { RevealWords } from "@/components/ui/reveal-words";
@@ -14,7 +14,7 @@ export function FinalCtaSection() {
     >
       <div className="mx-auto max-w-[1240px]">
         <div className="flex flex-wrap items-start gap-[clamp(24px,4vw,64px)]">
-          <div className="min-w-[min(100%,300px)] flex-[1_1_460px]">
+          <div className="min-w-[min(100%,300px)] flex-[1_1_420px]">
             <Image
               data-stagger
               src={site.logo.src}
@@ -28,53 +28,97 @@ export function FinalCtaSection() {
             >
               <RevealWords
                 segments={[
-                  { text: finalCta.titleLead },
+                  { text: finalCta.titleLead + " " },
                   { text: finalCta.titleAccent, accent: true },
                 ]}
                 tail={finalCta.titleTail}
               />
             </h2>
-          </div>
-
-          <div className="min-w-[min(100%,280px)] flex-[1_1_360px]">
             <p
               data-stagger
-              className="text-[clamp(15px,2vw,18px)] leading-[1.6] text-pretty text-text-muted"
+              className="mt-6 text-[clamp(15px,2vw,18px)] leading-[1.6] text-pretty text-text-muted max-w-[50ch]"
             >
               {finalCta.paragraph}
             </p>
+          </div>
 
-            {/* O preço vem antes do botão: quem clica precisa saber o que está
-                comprando. Antes ele era microtexto depois do CTA. */}
-            <div
-              data-stagger
-              className="mt-[clamp(22px,3vw,32px)] border border-line-strong bg-black/25 p-[clamp(18px,2.4vw,26px)]"
-            >
-              <div className="font-display text-[clamp(40px,5.4vw,64px)] leading-[0.9] font-extrabold text-accent-soft uppercase">
-                {finalCta.offer.price}
-              </div>
-              <div className="mt-2.5 font-sans text-[14px] leading-[1.5] text-text">
-                {finalCta.offer.label}
-              </div>
-              <div className="mt-1 flex flex-wrap items-center gap-2 font-sans text-[13px] text-text-dim">
-                <span>{finalCta.offer.vacancies}</span>
-                <span className="text-accent" aria-hidden>
-                  /
-                </span>
-                <span>{finalCta.offer.duration}</span>
-              </div>
-
-              <Button {...registration()} size="block" className="mt-[clamp(18px,2.4vw,24px)]">
-                {finalCta.cta}
-                <ArrowRight width={18} height={18} strokeWidth={1.6} aria-hidden />
-              </Button>
-
-              <p className="mt-3 flex items-center justify-center gap-2 font-sans text-[12px] text-text-dim">
-                <ShieldCheck width={15} height={15} strokeWidth={1.6} aria-hidden />
-                {finalCta.note}
-              </p>
+          <div className="min-w-[min(100%,280px)] flex-[1_1_520px]">
+            <div data-stagger className="mb-4">
+              <span className="font-sans text-xs font-bold tracking-widest text-accent-soft uppercase">
+                {finalCta.headline}
+              </span>
             </div>
 
+            {/* 2 Offer Cards in Final CTA */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Plano Standard R$ 49,90 */}
+              <div
+                data-stagger
+                className="flex flex-col justify-between rounded-xl border border-line-strong bg-black/40 p-5 transition-all hover:border-accent/40"
+              >
+                <div>
+                  <span className="rounded bg-white/10 px-2 py-0.5 font-sans text-[10px] font-extrabold text-text-dim uppercase">
+                    EXPERIÊNCIA COMPLETA
+                  </span>
+                  <div className="mt-3 font-display text-4xl font-extrabold text-white">
+                    {finalCta.standardOffer.price}
+                  </div>
+                  <div className="mt-1 font-sans text-sm font-bold text-accent-soft">
+                    {finalCta.standardOffer.label}
+                  </div>
+                  <p className="mt-1 text-xs text-text-muted leading-relaxed">
+                    {finalCta.standardOffer.desc}
+                  </p>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-line-strong">
+                  <Button {...registration()} variant="outline" size="block" className="py-3 text-xs">
+                    GARANTIR R$ 49,90
+                    <ArrowRight width={16} height={16} aria-hidden />
+                  </Button>
+                </div>
+              </div>
+
+              {/* Plano Premium R$ 89,90 */}
+              <div
+                data-stagger
+                className="flex flex-col justify-between rounded-xl border border-accent bg-accent/10 p-5 shadow-[0_0_30px_rgba(46,123,255,0.25)] relative overflow-hidden"
+              >
+                <div>
+                  <span className="rounded bg-accent px-2 py-0.5 font-sans text-[10px] font-extrabold text-white uppercase">
+                    UNIFORME FC 27 INCLUSO
+                  </span>
+                  <div className="mt-3 font-display text-4xl font-extrabold text-white">
+                    {finalCta.premiumOffer.price}
+                  </div>
+                  <div className="mt-1 font-sans text-sm font-bold text-accent-bright">
+                    {finalCta.premiumOffer.label}
+                  </div>
+                  <p className="mt-1 text-xs text-text-muted leading-relaxed">
+                    {finalCta.premiumOffer.desc}
+                  </p>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-line-strong">
+                  <Button {...registration()} variant="solid" size="block" className="py-3 text-xs">
+                    GARANTIR R$ 89,90
+                    <ArrowRight width={16} height={16} aria-hidden />
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            <div data-stagger className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-line-strong bg-black/20 px-4 py-3 text-xs text-text-dim">
+              <div className="flex items-center gap-2">
+                <ShieldCheck width={16} height={16} className="text-accent" aria-hidden />
+                <span>{finalCta.note}</span>
+              </div>
+              <div className="flex items-center gap-2 font-semibold">
+                <span>{finalCta.vacancies}</span>
+                <span className="text-accent">/</span>
+                <span>{finalCta.duration}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

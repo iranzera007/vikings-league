@@ -1,6 +1,7 @@
 import { ScrollProgress } from "@/components/scroll-progress";
 import { SideRail } from "@/components/side-rail";
 import { SiteHeader } from "@/components/sections/site-header";
+import { FloatingSocials } from "@/components/ui/floating-socials";
 import { HeroSection } from "@/components/sections/hero-section";
 import { OrgSection } from "@/components/sections/org-section";
 import { NumbersSection } from "@/components/sections/numbers-section";
@@ -10,6 +11,7 @@ import { PhasesSection } from "@/components/sections/phases-section";
 import { CalendarSection } from "@/components/sections/calendar-section";
 import { ScoutingSection } from "@/components/sections/scouting-section";
 import { AwardsSection } from "@/components/sections/awards-section";
+import { VideoGallerySection } from "@/components/sections/video-gallery-section";
 import { PartnersSection } from "@/components/sections/partners-section";
 import { FinalCtaSection } from "@/components/sections/final-cta-section";
 import { SiteFooter } from "@/components/sections/site-footer";
@@ -26,6 +28,7 @@ export default function Page() {
       <ScrollProgress />
       <SideRail />
       <SiteHeader />
+      <FloatingSocials />
 
       <main>
         <HeroSection />
@@ -36,6 +39,7 @@ export default function Page() {
         <CalendarSection />
         <ScoutingSection />
         <AwardsSection />
+        <VideoGallerySection />
         <PartnersSection />
         <NumbersSection />
         <FinalCtaSection />
@@ -46,3 +50,4 @@ export default function Page() {
     </div>
   );
 }
+

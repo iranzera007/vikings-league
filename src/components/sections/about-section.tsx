@@ -52,6 +52,35 @@ export function AboutSection() {
           ))}
         </div>
 
+        {/* Vídeo de Apresentação da Liga */}
+        {about.presentationVideo && (
+          <div data-stagger className="mt-[clamp(36px,5vw,64px)] overflow-hidden rounded-2xl border border-accent/40 bg-bg-alt p-[clamp(16px,3vw,32px)] shadow-[0_0_40px_rgba(46,123,255,0.15)]">
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+              <span className="rounded border border-accent/50 bg-accent/20 px-3 py-1 font-sans text-xs font-bold text-accent-soft uppercase">
+                {about.presentationVideo.badge}
+              </span>
+              <span className="font-sans text-xs text-text-dim">
+                Vikings Team E-sports
+              </span>
+            </div>
+            <h3 className="mb-2 font-display text-[clamp(22px,3.5vw,36px)] leading-[0.95] font-extrabold uppercase text-white">
+              {about.presentationVideo.title}
+            </h3>
+            <p className="mb-6 max-w-[65ch] text-sm leading-relaxed text-text-muted">
+              {about.presentationVideo.description}
+            </p>
+            <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-line-strong bg-black shadow-2xl">
+              <video
+                src={about.presentationVideo.src}
+                poster={about.presentationVideo.poster}
+                controls
+                playsInline
+                className="h-full w-full object-contain"
+              />
+            </div>
+          </div>
+        )}
+
         {/* Galeria rola na horizontal; o card do Instagram fica fixo ao lado,
             como âncora de prova social. Mais mídia aumenta a largura
             rolável, não a altura da seção. */}

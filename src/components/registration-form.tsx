@@ -16,6 +16,7 @@ type FormStatus =
 
 export function RegistrationForm() {
   const [status, setStatus] = useState<FormStatus>({ state: "idle" });
+  const [selectedPlan, setSelectedPlan] = useState<"standard" | "premium">("premium");
   const [selectedPositions, setSelectedPositions] = useState<Position[]>([]);
   const [turnstileToken, setTurnstileToken] = useState("");
   const [turnstileResetCount, setTurnstileResetCount] = useState(0);
@@ -129,6 +130,60 @@ export function RegistrationForm() {
           </Field>
         </div>
       </div>
+
+      {/* Seletor de Plano de Inscrição */}
+      <fieldset className="border-b border-line-strong p-[clamp(12px,1.5vw,16px)] bg-accent/5">
+        <legend className="px-2 font-sans text-[11px] font-extrabold tracking-[0.12em] text-accent-soft uppercase">
+          Escolha o seu plano de inscrição
+        </legend>
+        <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <label
+            className={cn(
+              "flex cursor-pointer flex-col justify-between rounded-lg border p-3.5 transition-all",
+              selectedPlan === "standard"
+                ? "border-accent bg-accent/20 text-white shadow-[0_0_15px_rgba(46,123,255,0.3)] ring-1 ring-accent"
+                : "border-line-strong bg-black/30 text-text-muted hover:border-white/30",
+            )}
+          >
+            <div className="flex items-center justify-between">
+              <span className="font-display text-base font-bold uppercase text-white">PLANO DE INSCRIÇÃO</span>
+              <input
+                type="radio"
+                name="plan"
+                value="standard"
+                checked={selectedPlan === "standard"}
+                onChange={() => setSelectedPlan("standard")}
+                className="h-4 w-4 accent-accent"
+              />
+            </div>
+            <div className="mt-2 font-display text-2xl font-extrabold text-white">R$ 49,90</div>
+            <span className="mt-1 text-[11px] text-text-dim">Experiência completa na competição</span>
+          </label>
+
+          <label
+            className={cn(
+              "flex cursor-pointer flex-col justify-between rounded-lg border p-3.5 transition-all relative overflow-hidden",
+              selectedPlan === "premium"
+                ? "border-accent bg-accent/25 text-white shadow-[0_0_20px_rgba(46,123,255,0.4)] ring-1 ring-accent"
+                : "border-line-strong bg-black/30 text-text-muted hover:border-white/30",
+            )}
+          >
+            <div className="flex items-center justify-between">
+              <span className="font-display text-base font-bold text-accent-bright uppercase">PLANO PREMIUM</span>
+              <input
+                type="radio"
+                name="plan"
+                value="premium"
+                checked={selectedPlan === "premium"}
+                onChange={() => setSelectedPlan("premium")}
+                className="h-4 w-4 accent-accent"
+              />
+            </div>
+            <div className="mt-2 font-display text-2xl font-extrabold text-white">R$ 89,90</div>
+            <span className="mt-1 text-[11px] text-accent-soft font-bold">Inscrição + Uniforme Oficial FC 27</span>
+          </label>
+        </div>
+      </fieldset>
 
       <div className="grid gap-x-4 gap-y-3 p-[clamp(12px,1.5vw,16px)] sm:grid-cols-2 lg:grid-cols-4">
         <Field label="Nome completo" className="lg:col-span-2">

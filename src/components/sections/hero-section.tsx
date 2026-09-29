@@ -90,7 +90,7 @@ export function HeroSection() {
               value={hero.stats.price.value}
               label={hero.stats.price.label}
               accent
-              count={{ value: 89.9, prefix: "R$ ", decimals: 2, onMount: true, delay: 0.8 }}
+              count={{ value: 49.9, prefix: "R$ ", decimals: 2, onMount: true, delay: 0.8 }}
             />
           ) : null}
           <Stat value={hero.stats.duration.value} label={hero.stats.duration.label} />

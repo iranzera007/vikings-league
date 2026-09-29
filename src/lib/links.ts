@@ -10,3 +10,5 @@ export function ctaProps(url: string) {
 
 export const registration = () => ({ href: config.registrationUrl });
 export const instagram = () => ctaProps(config.instagramUrl);
+export const discord = () => ctaProps(config.discordUrl);
+export const whatsapp = () => ctaProps(config.whatsappUrl);

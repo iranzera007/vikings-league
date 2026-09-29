@@ -65,10 +65,38 @@ export type Metric = {
 };
 
 export type Award = {
-  icon: IconName;
+  id: string;
   title: string;
-  /** Pendente: o que cada premiação individual entrega. Vazio = não renderiza. */
-  prize: string;
+  badge?: string;
+  prize?: string;
+  image: string;
+  icon?: IconName;
+};
+
+export type TrophyVideo = {
+  id: string;
+  title: string;
+  category: "troféus" | "lances";
+  badge: string;
+  src: string;
+  poster?: string;
+  description?: string;
+};
+
+export type PlanFeature = {
+  text: string;
+  highlight?: boolean;
+};
+
+export type PlanItem = {
+  id: "standard" | "premium";
+  title: string;
+  badge?: string;
+  price: string;
+  subtitle: string;
+  highlight: boolean;
+  features: readonly PlanFeature[];
+  cta: string;
 };
 
 /**
@@ -109,6 +137,8 @@ export type PhotoSlot = {
 export const config = {
   registrationUrl: "#inscricao",
   instagramUrl: "https://www.instagram.com/vikingsteamesports/",
+  discordUrl: "https://discord.gg/CWGYwB8hb",
+  whatsappUrl: "https://chat.whatsapp.com/C0q8uv7gvya9yZKglSUbuv?s=cl&p=a&ilr=4&iam=1",
   showPrice: true,
 } as const;
 
@@ -117,7 +147,7 @@ export const site = {
   org: "Vikings Team E-sports",
   season: "TEMPORADA 2026",
   vacancies: "120 VAGAS",
-  price: "R$ 89,90",
+  price: "A PARTIR DE R$ 49,90",
   duration: "1 MÊS",
   logo: {
     src: "/images/escudo-vikings.webp",
@@ -135,8 +165,9 @@ export const nav = {
     { label: "06", href: "#s5" },
     { label: "07", href: "#s6" },
     { label: "08", href: "#s7" },
-    { label: "09", href: "#sp" },
-    { label: "10", href: "#sn" },
+    { label: "09", href: "#sv" },
+    { label: "10", href: "#sp" },
+    { label: "11", href: "#sn" },
   ],
 } as const;
 
@@ -144,9 +175,11 @@ export const header = {
   cta: "GARANTIR VAGA",
   links: [
     { label: "A liga", href: "#s2" },
+    { label: "Planos", href: "#s3" },
     { label: "Como funciona", href: "#s4" },
     { label: "Calendário", href: "#s5" },
     { label: "Premiação", href: "#s7" },
+    { label: "Vídeos", href: "#sv" },
   ],
 } as const;
 
@@ -158,7 +191,7 @@ export const hero = {
     "Chegou a hora de sair do amadorismo e mostrar o seu verdadeiro valor no campo virtual. Uma peneira competitiva criada para identificar, avaliar e projetar talentos para o cenário competitivo.",
   stats: {
     vacancies: { value: "120", label: "VAGAS" },
-    price: { value: "R$ 89,90", label: "INSCRIÇÃO" },
+    price: { value: "R$ 49,90", label: "A PARTIR DE" },
     duration: { value: "1 MÊS", label: "DE COMPETIÇÃO" },
   },
   primaryCta: "GARANTIR MINHA VAGA",
@@ -346,7 +379,22 @@ export const about = {
       description: "Convivência com jogadores competitivos.",
     },
   ] satisfies Pillar[],
+  presentationVideo: {
+    title: "Apresentação Oficial da Vikings League",
+    badge: "VÍDEO DE APRESENTAÇÃO",
+    src: "/videos/apresentacao-vikings-league.mp4",
+    poster: "/images/elenco-libertadores.webp",
+    description: "Conheça em detalhes a estrutura, os objetivos e o formato da seletiva competitiva da Vikings Team E-sports.",
+  },
   gallery: [
+    {
+      type: "video",
+      id: "apresentacao-liga",
+      src: "/videos/apresentacao-vikings-league.mp4",
+      poster: "/images/elenco-libertadores.webp",
+      alt: "Vídeo de Apresentação Oficial da Vikings League",
+      label: "Apresentação da Liga",
+    },
     {
       type: "image",
       id: "atleta",
@@ -407,38 +455,49 @@ export const about = {
 } as const;
 
 export const benefits = {
-  eyebrow: "O QUE VOCÊ RECEBE",
-  titleLead: "Sua inscrição vai",
-  titleAccent: "além do campo",
-  counter: "6 ITENS INCLUSOS",
-  items: [
+  eyebrow: "PLANOS E BENEFÍCIOS",
+  titleLead: "Duas formas de entrar. Uma oportunidade de fazer",
+  titleAccent: "história",
+  subtitle: "Escolha a melhor experiência para a sua jornada na Vikings League:",
+  plans: [
     {
-      icon: "shirt",
-      title: "Uniforme oficial",
-      description: "Uniforme oficial da Vikings Team E-sports.",
+      id: "standard",
+      title: "Plano de Inscrição",
+      badge: "EXPERIÊNCIA COMPLETA",
+      price: "R$ 49,90",
+      subtitle: "Experiência completa na competição",
+      highlight: false,
+      cta: "GARANTIR PLANO R$ 49,90",
+      features: [
+        { text: "Banner individual de apresentação no Instagram (+19k seguidores)", highlight: false },
+        { text: "Banners individuais e coletivos de divulgação oficial", highlight: false },
+        { text: "Todos os jogos narrados (da fase de grupos até o mata-mata)", highlight: false },
+        { text: "Ranking de Players por posição", highlight: false },
+        { text: "Scout completo dos jogadores via Scout Clubs", highlight: false },
+        { text: "Disputa por troféus reais e físicos nas premiações individuais", highlight: false },
+        { text: "Visibilidade no cenário competitivo para o elenco da Vikings", highlight: false },
+      ],
     },
     {
-      icon: "swords",
-      title: "Competição",
-      description: "Acesso aos campeonatos da fase de avaliação.",
+      id: "premium",
+      title: "Plano Premium",
+      badge: "🔥 POPULAR · UNIFORME FC 27 INCLUSO",
+      price: "R$ 89,90",
+      subtitle: "Experiência completa + Uniforme exclusivo FC 27",
+      highlight: true,
+      cta: "GARANTIR PLANO PREMIUM (R$ 89,90)",
+      features: [
+        { text: "UNIFORME OFICIAL — EDIÇÃO EXCLUSIVA FC 27 INCLUSO", highlight: true },
+        { text: "Banner individual de apresentação no Instagram (+19k seguidores)", highlight: false },
+        { text: "Banners individuais e coletivos de divulgação oficial", highlight: false },
+        { text: "Todos os jogos narrados (da fase de grupos até o mata-mata)", highlight: false },
+        { text: "Ranking de Players por posição", highlight: false },
+        { text: "Scout completo dos jogadores via Scout Clubs", highlight: false },
+        { text: "Disputa por troféus reais e físicos nas premiações individuais", highlight: false },
+        { text: "Visibilidade no cenário competitivo para o elenco da Vikings", highlight: false },
+      ],
     },
-    {
-      icon: "megaphone",
-      title: "Marketing",
-      description: "Divulgação individual e coletiva dos atletas.",
-    },
-    {
-      icon: "radio",
-      title: "Visibilidade",
-      description: "Conteúdo, destaques e transmissões no Instagram oficial.",
-    },
-    { icon: "users", title: "Comunidade", description: "Networking com jogadores competitivos." },
-    {
-      icon: "line-chart",
-      title: "Scouting",
-      description: "Avaliação através de estatísticas de desempenho.",
-    },
-  ] satisfies Benefit[],
+  ] satisfies PlanItem[],
 } as const;
 
 export const phases = {
@@ -522,35 +581,215 @@ export const scouting = {
 } as const;
 
 export const awards = {
-  eyebrow: "PREMIAÇÃO",
-  titleLead: "Seu desempenho será",
-  titleAccent: "reconhecido",
+  eyebrow: "PREMIAÇÃO OFICIAL",
+  titleLead: "Troféus e premiações da",
+  titleAccent: "Vikings League",
   photo: {
     id: "trofeu",
     alt: "Troféu de artilheiro do campeonato da Vikings League",
     src: "/images/trofeu-artilheiro.webp",
   } satisfies PhotoSlot,
   items: [
-    { icon: "trophy", title: "Artilheiro", prize: "" },
-    { icon: "target", title: "Líder de assistências", prize: "" },
-    { icon: "shield", title: "Melhor zagueiro", prize: "" },
-    { icon: "hand", title: "Melhor goleiro", prize: "" },
+    {
+      id: "campeao",
+      title: "Campeão Vikings League",
+      badge: "1º LUGAR",
+      prize: "Troféu Oficial + Premiação para o Elenco Campeão",
+      image: "/images/awards/campeao.png",
+      icon: "trophy",
+    },
+    {
+      id: "vice-campeao",
+      title: "Vice-Campeão",
+      badge: "2º LUGAR",
+      prize: "Troféu de Vice-Campeão + Destaque Oficial da Liga",
+      image: "/images/awards/vice-campeao.png",
+      icon: "trophy-outline",
+    },
+    {
+      id: "artilheiro",
+      title: "Artilheiro da Liga",
+      badge: "CHUTEIRA DE OURO",
+      prize: "Troféu Exclusivo para o Maior Marcador de Gols",
+      image: "/images/awards/artilheiro.png",
+      icon: "goal",
+    },
+    {
+      id: "maestro",
+      title: "Maestro da Liga",
+      badge: "LÍDER DE ASSISTÊNCIAS",
+      prize: "Troféu Exclusivo para o Maior Garçom do Campeonato",
+      image: "/images/awards/maestro.png",
+      icon: "send",
+    },
+    {
+      id: "melhor-goleiro",
+      title: "Melhor Goleiro",
+      badge: "LUVA DE OURO",
+      prize: "Troféu para o Goleiro Mais Destacado da Edição",
+      image: "/images/awards/melhor-goleiro.png",
+      icon: "hand",
+    },
+    {
+      id: "melhor-meia",
+      title: "Melhor Meia",
+      badge: "SELEÇÃO DA LIGA",
+      prize: "Troféu para o Melhor Meio-Campista Criador",
+      image: "/images/awards/melhor-meia.png",
+      icon: "star",
+    },
+    {
+      id: "melhor-volante",
+      title: "Melhor Volante",
+      badge: "MURALHA DO MEIO",
+      prize: "Troféu para o Melhor Meia Defensivo / Volante",
+      image: "/images/awards/melhor-volante.png",
+      icon: "shield",
+    },
+    {
+      id: "melhor-ala",
+      title: "Melhor Ala",
+      badge: "DOMÍNIO LATERAL",
+      prize: "Troféu para o Melhor Ala / Lateral do Campeonato",
+      image: "/images/awards/melhor-ala.png",
+      icon: "swords",
+    },
+    {
+      id: "q1",
+      title: "Qualificatória 01",
+      badge: "SELETIVA DRAFT",
+      prize: "Troféu Destaque da Etapa Qualificatória 1",
+      image: "/images/awards/q1.png",
+      icon: "target",
+    },
+    {
+      id: "q2",
+      title: "Qualificatória 02",
+      badge: "SELETIVA DRAFT",
+      prize: "Troféu Destaque da Etapa Qualificatória 2",
+      image: "/images/awards/q2.png",
+      icon: "target",
+    },
+    {
+      id: "q3",
+      title: "Qualificatória 03",
+      badge: "SELETIVA DRAFT",
+      prize: "Troféu Destaque da Etapa Qualificatória 3",
+      image: "/images/awards/q3.png",
+      icon: "target",
+    },
+    {
+      id: "q4",
+      title: "Qualificatória 04",
+      badge: "SELETIVA DRAFT",
+      prize: "Troféu Destaque da Etapa Qualificatória 4",
+      image: "/images/awards/q4.png",
+      icon: "target",
+    },
   ] satisfies Award[],
+  videos: [
+    {
+      id: "video-trofeu-1",
+      title: "Apresentação dos Troféus Oficiais",
+      category: "troféus",
+      badge: "EXPOSIÇÃO DOS TROFÉUS",
+      src: "/videos/trofeu-video-1.mp4",
+      description: "Vídeo oficial de apresentação dos troféus físicos da Vikings League em detalhes.",
+    },
+    {
+      id: "video-trofeu-2",
+      title: "Troféu Destaque em Detalhes",
+      category: "troféus",
+      badge: "TROFÉU FÍSICO",
+      src: "/videos/trofeu-video-2.mp4",
+      description: "Exibição em detalhes do troféu oficial entregue aos premiados.",
+    },
+    {
+      id: "video-trofeu-3",
+      title: "Taça dos Campeões em Detalhes",
+      category: "troféus",
+      badge: "TAÇA DOS CAMPEÕES",
+      src: "/videos/trofeu-video-3.mp4",
+      description: "Apresentação da taça disputada pelas equipes na seletiva.",
+    },
+    {
+      id: "lance-1",
+      title: "Golaço & Destaque da Liga",
+      category: "lances",
+      badge: "LANCE DESTAQUE",
+      src: "/videos/lance-1.mp4",
+      description: "Jogada ensaiada com finalização precisa no ângulo.",
+    },
+    {
+      id: "lance-2",
+      title: "Jogada Trabalhada em Equipe",
+      category: "lances",
+      badge: "VISÃO DE JOGO",
+      src: "/videos/lance-2.mp4",
+      description: "Troca rápida de passes no meio-campo até o gol.",
+    },
+    {
+      id: "lance-3",
+      title: "Defesa Milagrosa do Goleiro",
+      category: "lances",
+      badge: "DEFESA ESPETACULAR",
+      src: "/videos/lance-3.mp4",
+      description: "Ponte salvadora no fim da partida decisiva.",
+    },
+    {
+      id: "lance-4",
+      title: "Contra-Ataque Rápido",
+      category: "lances",
+      badge: "VELOCIDADE TÁTICA",
+      src: "/videos/lance-4.mp4",
+      description: "Saída em velocidade surpreendendo a zaga adversária.",
+    },
+    {
+      id: "lance-5",
+      title: "Drible Desconcertante e Gol",
+      category: "lances",
+      badge: "HABILIDADE INDIVIDUAL",
+      src: "/videos/lance-5.mp4",
+      description: "Jogada individual deixando a zaga para trás.",
+    },
+    {
+      id: "lance-6",
+      title: "Pressão Alta e Recuperação",
+      category: "lances",
+      badge: "PRESSÃO DEFENSIVA",
+      src: "/videos/lance-6.mp4",
+      description: "Desarme no setor ofensivo e gol imediato.",
+    },
+    {
+      id: "lance-7",
+      title: "Chute no Ângulo",
+      category: "lances",
+      badge: "CHUTE PRECISO",
+      src: "/videos/lance-7.mp4",
+      description: "Finalização potente sem qualquer hipótese de defesa.",
+    },
+  ] satisfies TrophyVideo[],
 } as const;
 
 export const finalCta = {
   titleLead: "Pronto para mostrar do que você é",
   titleAccent: "capaz",
   titleTail: "?",
-  /** Absorvido da antiga seção "Oportunidade", que duplicava este CTA. */
   paragraph:
     "Você não está entrando apenas para disputar partidas. Está entrando para mostrar que merece estar entre os melhores.",
-  offer: {
-    price: "R$ 89,90",
-    label: "Inscrição para a Vikings League",
-    vacancies: "120 vagas disponíveis",
-    duration: "1 mês de competição",
+  headline: "DUAS FORMAS DE ENTRAR. UMA OPORTUNIDADE DE FAZER HISTÓRIA.",
+  standardOffer: {
+    price: "R$ 49,90",
+    label: "Plano de Inscrição",
+    desc: "Experiência completa na competição",
   },
+  premiumOffer: {
+    price: "R$ 89,90",
+    label: "Plano Premium",
+    desc: "Experiência completa + Uniforme exclusivo FC 27",
+  },
+  vacancies: "120 vagas disponíveis",
+  duration: "1 mês de competição",
   cta: "GARANTIR MINHA VAGA",
   note: "O link do grupo é liberado depois que a inscrição for registrada.",
 } as const;
